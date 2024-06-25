@@ -15,6 +15,7 @@ connectDB()
 
 app.use(logger)   
  
+// This is just a test to make sure that git is working properly. As long as this goes through I am good.
 
 app.use(cors(corsOptions))
 
