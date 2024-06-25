@@ -13,7 +13,8 @@ const PORT = process.env.PORT || 3500
 
 connectDB()
 
-app.use(logger)
+app.use(logger)   
+ 
 
 app.use(cors(corsOptions))
 
