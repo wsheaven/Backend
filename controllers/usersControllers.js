@@ -8,7 +8,7 @@ const bcrypt = require("bcrypt");
 // @access Private
 const getAllUsers = asyncHandler(async (req, res) => {
   const users = await User.find().select("-password").lean();
-  if (!users) {
+  if (!users?.length) {
     return res.status(400).json({ message: "No users found" });
   }
   res.json(users);
@@ -18,10 +18,12 @@ const getAllUsers = asyncHandler(async (req, res) => {
 // @route POST /users
 // @access Private
 const createNewUser = asyncHandler(async (req, res) => {
-  const { username, password, email } = req.body;
+  const { username, password, email } = req.body
+
 
   // confirm the data
-  if (!username || !password || !email) {
+  if ( !username|| !password || !email) 
+    {
     return res.status(400).json({ message: "All fields are required" });
   }
 
