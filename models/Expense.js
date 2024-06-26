@@ -18,4 +18,4 @@ expenseSchema.virtual("milesPerGallon").get(function () {
   return null;
 });
 
-const Expense = mongoose.model("Expense", expenseSchema);
+module.exports = mongoose.model("Expense", expenseSchema);

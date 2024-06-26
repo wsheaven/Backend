@@ -60,7 +60,7 @@ const updateUser = asyncHandler(async (req, res) => {
   const { id, username, password, email } = req.body;
 
   // confirm the data
-  if (!username || !password || !email) {
+  if (!username || !id || !email) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
@@ -107,7 +107,7 @@ const deleteUser = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'User ID Required' })
     }
 
-    // Does the user still have assigned notes?
+   // Does the user still have assigned notes?
     const expense = await Expense.findOne({ user: id }).lean().exec()
     if (expense) {
         return res.status(400).json({ message: 'User has assigned expenses' })
