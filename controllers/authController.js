@@ -31,13 +31,14 @@ const handleLogin = async (req, res) => {
         // Saving refreshToken with current user
         foundUser.refreshToken = refreshToken;
         const result = await foundUser.save();
+        const id = foundUser.id
         console.log(result);
 
         // Creates Secure Cookie with refresh token
         res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
 
         // Send access token to user
-        res.json({ accessToken });
+        res.json({ accessToken, id });
 
     } else {
         res.sendStatus(401);
