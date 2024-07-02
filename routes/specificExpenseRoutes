@@ -1,0 +1,7 @@
+const express = require('express')
+const router = express.Router()
+const { getAllExpensesByUserId } = require('../controllers/specificExpenseController');
+
+router.get('/expenses/user/:userId', getAllExpensesByUserId);
+
+module.exports = router;

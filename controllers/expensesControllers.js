@@ -129,10 +129,10 @@ const deleteExpense = asyncHandler(async (req, res) => {
 
 
 
-
 module.exports = {
     getAllExpensesByUserId,
     createNewExpense,
     updateExpense,
-    deleteExpense
+    deleteExpense,
+    getAllExpensesByUserId
 };

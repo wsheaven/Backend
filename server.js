@@ -8,12 +8,15 @@ const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const corsOptions = require('./config/corsOptions')
 const connectDB = require('./config/dbConn')
+const credentials = require('./middleware/credentials')
 const mongoose = require('mongoose')
 const PORT = process.env.PORT || 3500
 
 connectDB()
 
 app.use(logger)   
+
+app.use(credentials)
 
 app.use(cors(corsOptions))
 
@@ -26,6 +29,10 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 app.use('/', require('./routes/root'))
 app.use('/users', require('./routes/userRoutes'))
 app.use('/expenses', require('./routes/expenseRoutes'))
+app.use('/api', require("./routes/specificExpenseRoutes"))
+app.use('/auth', require("./routes/auth"))
+app.use('/logout', require("./routes/logout"))
+app.use('/refresh', require('./routes/refresh'))
 
 app.all('*', (req, res) => {
     res.status(404)
