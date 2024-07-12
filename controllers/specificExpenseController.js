@@ -11,14 +11,17 @@ const getAllExpensesByUserId = asyncHandler(async (req, res) => {
         }
 
         // Find all expenses for this user
-        const expenses = await Expense.find({ user: userId }).lean().exec();
+        const expenses = await Expense.find({ user: userId }).exec(); // Removed .lean()
+
+        // Transform to include virtuals
+        const expensesWithVirtuals = expenses.map(expense => expense.toObject({ virtuals: true }));
 
         // Send the found expenses back to the client
-        res.json(expenses);
+        res.json(expensesWithVirtuals);
     } catch (error) {
         console.error('Failed to get expenses:', error);
         res.status(500).json({ message: 'Failed to get expenses', error: error.message });
     }
 });
 
-module.exports = {getAllExpensesByUserId }
+module.exports = { getAllExpensesByUserId };

@@ -32,7 +32,7 @@ const getAllExpensesByUserId = asyncHandler(async (req, res) => {
 
 
 const createNewExpense = asyncHandler(async (req, res) => {
-    const { userId, category, cost, notes, mileage, isGasExpense, milesTraveledForGas } = req.body;
+    const { userId, category, cost, notes, mileage, isGasExpense, milesTraveledForGas, gasGallons } = req.body;
 
     // Confirm the data
     if (!userId || !category || !cost || !mileage) {
@@ -54,7 +54,8 @@ const createNewExpense = asyncHandler(async (req, res) => {
         mileage,
         date: new Date(), // Optional: handle date if not provided in the request
         isGasExpense: isGasExpense || false,
-        milesTraveledForGas
+        milesTraveledForGas,
+        gasGallons
     };
 
     // Create and store the new expense

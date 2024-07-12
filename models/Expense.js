@@ -9,11 +9,15 @@ const expenseSchema = new mongoose.Schema({
   date: { type: Date, default: Date.now },
   isGasExpense: { type: Boolean, default: false },
   milesTraveledForGas: Number,
+  gasGallons: Number,
+}, {
+  toJSON: { virtuals: true },  // Ensure virtuals are included in toJSON()
+  toObject: { virtuals: true } // Ensure virtuals are included in toObject()
 });
 
 expenseSchema.virtual("milesPerGallon").get(function () {
-  if (this.isGasExpense && this.milesTraveledForGas && this.cost) {
-    return this.milesTraveledForGas / this.cost; // Assuming 'cost' here means the amount of gas purchased
+  if (this.isGasExpense && this.milesTraveledForGas && this.gasGallons) {
+    return this.milesTraveledForGas / this.gasGallons;
   }
   return null;
 });
