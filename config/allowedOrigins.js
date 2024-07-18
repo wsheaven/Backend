@@ -1,6 +1,3 @@
-const allowedOrigins = [
-    'http://localhost:3000',
-    'http://10.21.6.165:3000'
-]
+const allowedOrigins = ["https://car-expense-tracker-h6k1.onrender.com/"];
 
-module.exports = allowedOrigins
+module.exports = allowedOrigins;

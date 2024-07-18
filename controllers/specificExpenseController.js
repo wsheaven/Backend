@@ -1,22 +1,17 @@
-const Expense = require('../models/Expense'); // Assuming this is your Expense model
+const Expense = require('../models/Expense');
 const asyncHandler = require("express-async-handler");
 
 const getAllExpensesByUserId = asyncHandler(async (req, res) => {
-    const { userId } = req.params; // Extract the userId from the request parameters
+    const { userId } = req.params;
 
     try {
-        // Ensure the userId is provided
         if (!userId) {
             return res.status(400).json({ message: "User ID is required" });
         }
-
-        // Find all expenses for this user
         const expenses = await Expense.find({ user: userId }).exec(); // Removed .lean()
 
-        // Transform to include virtuals
         const expensesWithVirtuals = expenses.map(expense => expense.toObject({ virtuals: true }));
 
-        // Send the found expenses back to the client
         res.json(expensesWithVirtuals);
     } catch (error) {
         console.error('Failed to get expenses:', error);
